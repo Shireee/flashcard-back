@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Upload Image from Clipboard</title>
+    <title>Aboba</title>
     <style>
       label {
         display: block;
@@ -55,7 +55,6 @@
         color: white;
         cursor: pointer;
       }
-      /* Styles for the dictionary search */
       .dictionary-results {
         margin-top: 10px;
       }
@@ -70,15 +69,12 @@
   <body>
     <h1>Paste an Image or Upload from System</h1>
 
-    <!-- Image Upload Label -->
     <label for="image" id="uploadLabel">
       <input type="file" name="image" id="image" style="display: none" />
     </label>
 
-    <!-- Input for Searching Images and Words -->
     <input type="text" id="searchInput" placeholder="Search for images or words" />
 
-    <!-- Popup for Image Selection -->
     <div id="popup">
       <div class="popup-close" onclick="closePopup()">X</div>
       <div id="popupContent"></div>
@@ -86,7 +82,6 @@
 
     <button type="button" id="uploadButton">Upload</button>
 
-    <!-- Dictionary Search Results -->
     <div class="dictionary-results" id="results"></div>
 
     <script>
@@ -98,18 +93,14 @@
       const searchInput = document.getElementById("searchInput");
       const resultsContainer = document.getElementById("results");
       let imageData = null; // Store the image file here
-      let selectedImage = null; // Store the selected image for upload
 
-      // Listen for the paste event to handle image pasting
       window.addEventListener("paste", function (event) {
         const items = event.clipboardData.items;
         for (let i = 0; i < items.length; i++) {
           const item = items[i];
-
           if (item.type.startsWith("image/")) {
             const file = item.getAsFile();
             imageData = file;
-
             const reader = new FileReader();
             reader.onload = function (e) {
               label.style.backgroundImage = `url(${e.target.result})`;
@@ -119,38 +110,27 @@
         }
       });
 
-      let debounceTimeout; // Declare a variable to hold the timeout ID
-
-      // Handle search input (both for images and words)
+      let debounceTimeout;
       searchInput.addEventListener("input", function () {
         const query = searchInput.value.trim();
-
-        // Clear the previous timeout to reset the delay whenever the user types
         clearTimeout(debounceTimeout);
-
         if (query) {
-          // Set a new timeout to trigger the search after 2 seconds of inactivity
           debounceTimeout = setTimeout(function () {
-            searchImagesAndWords(query); // Call the search function after 2 seconds
+            searchImagesAndWords(query);
           }, 2000);
         } else {
-          popup.style.display = "none"; // Hide popup if the query is empty
-          resultsContainer.innerHTML = ""; // Clear previous dictionary results
+          popup.style.display = "none";
+          resultsContainer.innerHTML = "";
         }
       });
 
-      // Search both images and words (translations) from the input query
       async function searchImagesAndWords(query) {
-        // Search for images first
         await searchImages(query);
-
-        // Then, search for word translations
         await fetchTranslations(query);
       }
 
-      // Search images from Unsplash API
       async function searchImages(query) {
-        const accessKey = "flrfcq3Frm3NV2oS0KlGZ4FHCsTytmyFn9Ra1ZWEJBI"; // Unsplash Access Key
+        const accessKey = "flrfcq3Frm3NV2oS0KlGZ4FHCsTytmyFn9Ra1ZWEJBI";
         const url = `https://api.unsplash.com/search/photos?query=${query}&client_id=${accessKey}&per_page=12`;
 
         try {
@@ -162,10 +142,8 @@
         }
       }
 
-      // Display images in the popup
       function displayImages(images) {
-        popupContent.innerHTML = ""; // Clear previous images
-
+        popupContent.innerHTML = "";
         if (images.length > 0) {
           images.forEach((image) => {
             const img = document.createElement("img");
@@ -173,52 +151,35 @@
             img.alt = image.alt_description;
             img.classList.add("image-thumbnail");
             img.onclick = () => selectImage(image);
-
             popupContent.appendChild(img);
           });
-
           popup.style.display = "flex";
         }
       }
 
-      // Select an image and close the popup
       function selectImage(image) {
-        selectedImage = image; // Store selected image
-
-        // Get the image URL for display (from Unsplash API)
         const imageUrl = image.urls.regular;
-
-        // Set the background of the label to the selected image
         label.style.backgroundImage = `url(${imageUrl})`;
-
-        // Store the image data URL for upload (we need to download the image)
-        imageData = null; // Clear any existing image data
-
-        // Fetch the image as a Blob and store it in imageData
+        imageData = null;
         fetch(imageUrl)
           .then((response) => response.blob())
           .then((blob) => {
             const file = new File([blob], image.id + ".jpg", { type: "image/jpeg" });
-            console.log(file);
-            imageData = file; // Now we have a valid File object for upload
+            imageData = file;
           })
           .catch((error) => console.error("Error fetching image:", error));
 
-        // Close the popup
         popup.style.display = "none";
       }
 
-      // Close the popup
       function closePopup() {
         popup.style.display = "none";
       }
 
-      // Handle the file upload from the system
       fileInput.addEventListener("change", function () {
         const file = fileInput.files[0];
         if (file) {
           imageData = file;
-
           const reader = new FileReader();
           reader.onload = function (e) {
             label.style.backgroundImage = `url(${e.target.result})`;
@@ -227,9 +188,7 @@
         }
       });
 
-      // Handle the upload button click
       uploadButton.addEventListener("click", function () {
-        // Ensure imageData is not null before uploading
         if (!imageData) {
           alert("No image to upload.");
           return;
@@ -237,6 +196,22 @@
 
         const formData = new FormData();
         formData.append("image", imageData);
+
+        const mockCard = {
+          id: 1,
+          Img: "path/to/uploaded/img.jpg", // Path will be set by the server
+          item: "Sample text",
+          itemReveal: "Revealed text",
+          examples: [
+            { item: "Example 1", itemReveal: "Example reveal 1" },
+            { item: "Example 2", itemReveal: "Example reveal 2" },
+          ],
+          repeatNumber: 0,
+          nextRepeat: new Date(),
+          metrika: {},
+        };
+
+        formData.append("card", JSON.stringify(mockCard));
 
         fetch("http://localhost:3000/upload", {
           method: "POST",
@@ -251,12 +226,10 @@
           });
       });
 
-      // API key for Yandex Dictionary
       const apiKey =
         "dict.1.1.20231123T220544Z.1f195b742ed11ead.0c3b1ec28970bbd60676daed6eb4836c8b7d4dcc";
       const langPair = "en-ru";
 
-      // Fetch word translations from Yandex API
       function fetchTranslations(word) {
         const url = `https://dictionary.yandex.net/api/v1/dicservice.json/lookup?key=${apiKey}&lang=${langPair}&text=${word}`;
 
@@ -266,28 +239,21 @@
             displayTranslations(data.def);
           })
           .catch((error) => {
-            console.error;
             console.error("Error fetching translations:", error);
           });
       }
 
-      // Display translation results in the dictionary results container
       function displayTranslations(definitions) {
-        // Clear previous results
         resultsContainer.innerHTML = "";
-
         if (definitions && definitions.length > 0) {
           definitions.forEach((def) => {
             const resultItem = document.createElement("div");
             resultItem.classList.add("result-item");
-            resultItem.innerHTML = `
-              <strong>${def.text}</strong> - ${def.pos}<br>
-              ${def.tr.map((translation) => translation.text).join(", ")}
-            `;
+            resultItem.textContent = `${def.text} - ${def.tr.map((tr) => tr.text).join(", ")}`;
             resultsContainer.appendChild(resultItem);
           });
         } else {
-          resultsContainer.innerHTML = "<p>No definitions found.</p>";
+          resultsContainer.innerHTML = "<p>No translations found</p>";
         }
       }
     </script>
