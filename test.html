@@ -5,12 +5,23 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Upload Image from Clipboard</title>
   </head>
+  <style>
+    label {
+      display: block;
+      cursor: pointer;
+      width: 400px;
+      height: 400px;
+      background-size: cover;
+      background-position: center;
+      border: 2px dashed #ccc;
+    }
+  </style>
   <body>
     <h1>Paste an Image or Upload from System</h1>
 
     <label for="image" id="uploadLabel">
       <!-- The file input will be hidden, and the label will serve as the clickable area -->
-      <input type="file" name="image" id="image" />
+      <input type="file" name="image" id="image" style="display: none" />
     </label>
 
     <button type="button" id="uploadButton">Upload</button>
@@ -39,6 +50,21 @@
             };
             reader.readAsDataURL(file); // Read the pasted image as a data URL
           }
+        }
+      });
+
+      // Listen for changes in the file input to handle uploads from the system
+      fileInput.addEventListener("change", function () {
+        const file = fileInput.files[0];
+        if (file) {
+          imageData = file; // Store the file to upload later
+
+          // Set the background image of the label
+          const reader = new FileReader();
+          reader.onload = function (e) {
+            label.style.backgroundImage = `url(${e.target.result})`;
+          };
+          reader.readAsDataURL(file); // Read the selected image as a data URL
         }
       });
 
