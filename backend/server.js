@@ -1,5 +1,6 @@
+// Import necessary modules
 const express = require("express");
-const multer = require("multer");
+const fileUpload = require("express-fileupload");
 const fs = require("fs");
 const path = require("path");
 const app = express();
@@ -9,35 +10,36 @@ const cors = require("cors");
 // Enable CORS
 app.use(cors());
 
-// Set up multer storage configuration
-const storage = multer.diskStorage({
-  destination: function (req, file, cb) {
-    const uploadDir = path.join(__dirname, "upload");
-    if (!fs.existsSync(uploadDir)) {
-      fs.mkdirSync(uploadDir, { recursive: true }); // Ensure the upload directory exists
-    }
-    cb(null, uploadDir); // Destination directory
-  },
-  filename: function (req, file, cb) {
-    cb(null, Date.now() + "-" + file.originalname); // Ensure unique filenames with timestamps
-  },
-});
+// Use the express-fileupload middleware for file uploads
+app.use(fileUpload());
 
-// Initialize multer with the storage configuration
-const upload = multer({ storage: storage });
-
-// Serve static files (optional)
+// Serve static files (optional, for example to serve HTML forms or other assets)
 app.use(express.static("public"));
 
-// Endpoint to upload image
-app.post("/upload", upload.single("image"), (req, res) => {
-  // Check if a file was uploaded
-  if (!req.file) {
-    return res.status(400).send("No file uploaded.");
-  }
+// Ensure the upload directory exists
+const uploadDir = path.join(__dirname, "upload");
+if (!fs.existsSync(uploadDir)) {
+  fs.mkdirSync(uploadDir, { recursive: true });
+}
 
-  console.log("File uploaded:", req.file);
-  res.status(200).send("File uploaded successfully.");
+app.post("/upload", async (req, res) => {
+  try {
+    if (!req.files || !req.files.image) {
+      return res.status(400).send("No file uploaded.");
+    }
+
+    const image = req.files.image;
+    // Get current date and time in 'YYYYMMDDHHMMSS' format
+    const timestamp = new Date().toISOString().replace(/[-:.TZ]/g, "");
+    // Add timestamp to the file name
+    const uploadPath = path.join(uploadDir, `${timestamp}_${image.name}`);
+
+    await image.mv(uploadPath);
+    res.status(200).send("File uploaded successfully.");
+  } catch (err) {
+    console.error("Error during file upload:", err);
+    res.status(500).send("Error uploading file.");
+  }
 });
 
 // Start the server
