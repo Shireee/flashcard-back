@@ -1,7 +1,7 @@
 [
   {
-    "id": 1,
-    "Img": "C:\\Users\\Shireee\\Desktop\\cards\\backend\\upload\\20241112130728795_image.png",
+    "id": 1731419879582,
+    "Img": "upload\\20241112135759598_Screenshot 2024-10-07 000351.png",
     "item": "Sample text",
     "itemReveal": "Revealed text",
     "examples": [
@@ -15,12 +15,12 @@
       }
     ],
     "repeatNumber": 0,
-    "nextRepeat": "2024-11-12T13:07:28.692Z",
+    "nextRepeat": 1731419879582,
     "metrika": {}
   },
   {
-    "id": 1,
-    "Img": "C:\\Users\\Shireee\\Desktop\\cards\\backend\\upload\\20241112130743863_image.png",
+    "id": 1731419901093,
+    "Img": "upload\\20241112135821098_image.png",
     "item": "Sample text",
     "itemReveal": "Revealed text",
     "examples": [
@@ -33,46 +33,8 @@
         "itemReveal": "Example reveal 2"
       }
     ],
-    "repeatNumber": 0,
-    "nextRepeat": "2024-11-12T13:07:43.773Z",
-    "metrika": {}
-  },
-  {
-    "id": 1,
-    "Img": "C:\\Users\\Shireee\\Desktop\\cards\\backend\\upload\\20241112130746642_image.png",
-    "item": "Sample text",
-    "itemReveal": "Revealed text",
-    "examples": [
-      {
-        "item": "Example 1",
-        "itemReveal": "Example reveal 1"
-      },
-      {
-        "item": "Example 2",
-        "itemReveal": "Example reveal 2"
-      }
-    ],
-    "repeatNumber": 0,
-    "nextRepeat": "2024-11-12T13:07:46.568Z",
-    "metrika": {}
-  },
-  {
-    "id": 1,
-    "Img": "C:\\Users\\Shireee\\Desktop\\cards\\backend\\upload\\20241112131002154_cWOzOnSoh6Q.jpg",
-    "item": "Sample text",
-    "itemReveal": "Revealed text",
-    "examples": [
-      {
-        "item": "Example 1",
-        "itemReveal": "Example reveal 1"
-      },
-      {
-        "item": "Example 2",
-        "itemReveal": "Example reveal 2"
-      }
-    ],
-    "repeatNumber": 0,
-    "nextRepeat": "2024-11-12T13:10:01.727Z",
+    "repeatNumber": 6,
+    "nextRepeat": 1731419901093,
     "metrika": {}
   }
 ]

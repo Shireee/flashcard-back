@@ -21,7 +21,7 @@ app.use(express.urlencoded({ extended: true })); // for parsing application/x-ww
 app.use(fileUpload());
 
 // Ensure the upload directory exists
-const uploadDir = path.join(__dirname, "upload");
+const uploadDir = path.join(__dirname, "");
 if (!fs.existsSync(uploadDir)) {
   fs.mkdirSync(uploadDir, { recursive: true });
 }
@@ -43,7 +43,7 @@ app.post("/upload", async (req, res) => {
     const timestamp = new Date().toISOString().replace(/[-:.TZ]/g, "");
 
     // Add timestamp to the file name
-    const uploadPath = path.join(uploadDir, `${timestamp}_${image.name}`);
+    const uploadPath = path.join("upload", `${timestamp}_${image.name}`);
 
     // Move the image file to the upload directory
     await image.mv(uploadPath);
@@ -121,6 +121,81 @@ app.get("/cards", (req, res) => {
       console.error("Error parsing JSON data:", parseError);
       return res.status(500).send("Error parsing card data.");
     }
+  });
+});
+
+app.get("/getTrainSession", (req, res) => {
+  try {
+    // Read the cards from the JSON file
+    fs.readFile(jsonFilePath, "utf-8", (err, data) => {
+      if (err) {
+        return res.status(500).send("Error reading card data.");
+      }
+
+      let cards = JSON.parse(data);
+      const currentTime = Date.now();
+
+      // Filter the cards based on the repeatNumber and nextRepeat condition
+      const filteredCards = cards.filter((card) => {
+        const nextRepeat = card.nextRepeat;
+        const timeDifference = currentTime - nextRepeat;
+
+        switch (card.repeatNumber) {
+          case 0:
+            return true;
+          case 1:
+            return timeDifference > 30 * 60 * 1000; // 30 minutes
+          case 2:
+            return timeDifference > 2 * 60 * 60 * 1000; // 2 hours
+          case 3:
+            return timeDifference > 8 * 60 * 60 * 1000; // 8 hours
+          case 4:
+            return timeDifference > 24 * 60 * 60 * 1000; // 1 day
+          case 5:
+            return timeDifference > 3 * 24 * 60 * 60 * 1000; // 3 days
+          default:
+            return false;
+        }
+      });
+
+      res.status(200).json(filteredCards);
+    });
+  } catch (error) {
+    console.error("Error during filtering:", error);
+    res.status(500).send("Error filtering card data.");
+  }
+});
+
+// Endpoint to increase repeatNumber
+app.get("/trainChangeRepeatNumber/:id", (req, res) => {
+  const cardId = parseInt(req.params.id, 10);
+
+  // Read the current cards data from the JSON file
+  fs.readFile(jsonFilePath, "utf-8", (err, data) => {
+    if (err) {
+      return res.status(500).send("Error reading card data.");
+    }
+
+    let cards = JSON.parse(data);
+
+    // Find the card by ID
+    const cardIndex = cards.findIndex((card) => card.id === cardId);
+    if (cardIndex === -1) {
+      return res.status(404).send("Card not found.");
+    }
+
+    // Increase repeatNumber for the found card
+    cards[cardIndex].repeatNumber += 1;
+
+    // Save the updated cards data back to the file
+    fs.writeFile(jsonFilePath, JSON.stringify(cards, null, 2), (err) => {
+      if (err) {
+        return res.status(500).send("Error updating repeatNumber.");
+      }
+
+      // Respond with the updated card data
+      res.status(200).json(cards[cardIndex]);
+    });
   });
 });
 

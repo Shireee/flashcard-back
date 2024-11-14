@@ -67,7 +67,7 @@
     </style>
   </head>
   <body>
-    <h1>Paste an Image or Upload from System</h1>
+    <h1>Test</h1>
 
     <label for="image" id="uploadLabel">
       <input type="file" name="image" id="image" style="display: none" />
@@ -198,7 +198,7 @@
         formData.append("image", imageData);
 
         const mockCard = {
-          id: 1,
+          id: Date.now(),
           Img: "path/to/uploaded/img.jpg", // Path will be set by the server
           item: "Sample text",
           itemReveal: "Revealed text",
@@ -207,7 +207,7 @@
             { item: "Example 2", itemReveal: "Example reveal 2" },
           ],
           repeatNumber: 0,
-          nextRepeat: new Date(),
+          nextRepeat: Date.now(),
           metrika: {},
         };
 
