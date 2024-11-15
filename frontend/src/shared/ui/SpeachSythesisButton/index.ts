@@ -1,0 +1,1 @@
+export { SpeechSynthesisButton } from './SpeechSynthesisButton';

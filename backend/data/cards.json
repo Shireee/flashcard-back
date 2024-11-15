@@ -14,13 +14,13 @@
         "itemReveal": "Example reveal 2"
       }
     ],
-    "repeatNumber": 0,
-    "nextRepeat": 1731679512709,
+    "repeatNumber": 1,
+    "nextRepeat": 1731690413101,
     "metrika": {}
   },
   {
     "id": 1731680488593,
-    "Img": "404",
+    "Img": "https://images.unsplash.com/photo-1487017159836-4e23ece2e4cf?crop=entropy&cs=srgb&fm=jpg&ixid=M3w1MzE5NzF8MHwxfHNlYXJjaHwxfHxvZmZpY2V8ZW58MHx8fHwxNzMxNjgyMDQ5fDA&ixlib=rb-4.0.3&q=85",
     "item": "Sample text",
     "itemReveal": "Revealed text",
     "examples": [
