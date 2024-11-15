@@ -1,20 +1,18 @@
-import { useGetImages } from '@entities/TrainSession/model/useGetImages';
-import { useGetSynonyms } from '@entities/TrainSession/model/useGetSynonims';
-import { Loader } from '@shared/ui';
+import { useUpdateRepeatNumber } from '@entities/TrainSession/model/useUpdateNumber';
 
 export const TrainingSession: React.FC = () => {
-  // const { isSessionLoading, sessionData } = useGetTrainSession();
-  const { isLoading, data } = useGetImages('cat');
+  const { mutate: updateRepeatNumber, isLoading, isError } = useUpdateRepeatNumber();
 
-  return isLoading ? (
-    <Loader />
-  ) : (
-    data && (
-      <>
-        {data.map((word) => {
-          return <p>{word}</p>;
-        })}
-      </>
-    )
+  const handleUpdate = (id: number) => {
+    updateRepeatNumber(id);
+  };
+
+  return (
+    <div>
+      <button onClick={() => handleUpdate(1731680498898)} disabled={isLoading}>
+        Update Repeat Number
+      </button>
+      {isError && <p>Failed to update repeat number.</p>}
+    </div>
   );
 };

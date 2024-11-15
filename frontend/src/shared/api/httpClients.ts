@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 export const backendClient = axios.create({
-  baseURL: `${import.meta.env.API_BACKEND_SERVICE}`,
+  baseURL: `http://localhost:3000`,
   withCredentials: false
 });
 
