@@ -1,1 +1,1 @@
-export { TrainSession } from './TrainSession';
+export { TrainingSession } from './TrainingSession';

@@ -1,9 +1,10 @@
+import { useGetImages } from '@entities/TrainSession/model/useGetImages';
 import { useGetSynonyms } from '@entities/TrainSession/model/useGetSynonims';
 import { Loader } from '@shared/ui';
 
-export const TrainSession: React.FC = () => {
+export const TrainingSession: React.FC = () => {
   // const { isSessionLoading, sessionData } = useGetTrainSession();
-  const { isLoading, data } = useGetSynonyms('cat');
+  const { isLoading, data } = useGetImages('cat');
 
   return isLoading ? (
     <Loader />

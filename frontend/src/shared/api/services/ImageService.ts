@@ -4,7 +4,7 @@ const CLIENT_ID = 'flrfcq3Frm3NV2oS0KlGZ4FHCsTytmyFn9Ra1ZWEJBI';
 const RESPONSE_LENGTH = 12;
 
 export const ImageService = {
-  getImage: async (word: string): Promise<string[]> => {
+  getImages: async (word: string): Promise<string[]> => {
     try {
       const response = await thirdPartyHTTPClient.get<{ results: { urls: { small: string } }[] }>(
         'https://api.unsplash.com/search/photos',

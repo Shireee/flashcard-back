@@ -3,7 +3,7 @@ import { Provider } from 'react-redux';
 import { QueryClientProvider } from 'react-query';
 import { store } from '@shared/store';
 import { queryClient } from '@shared/api';
-import { TrainSession } from '@pages';
+import { TrainingSession } from '@pages';
 import { createTheme, ThemeProvider } from '@mui/material';
 import { themeOptions } from './config';
 
@@ -14,7 +14,7 @@ function App() {
       <QueryClientProvider client={queryClient}>
         <ThemeProvider theme={theme}>
           <CssBaseline />
-          <TrainSession />
+          <TrainingSession />
         </ThemeProvider>
       </QueryClientProvider>
     </Provider>

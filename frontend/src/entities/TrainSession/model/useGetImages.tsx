@@ -5,8 +5,8 @@ export function useGetImages(word: string) {
   return useQuery({
     keepPreviousData: true,
     queryFn: async () => {
-      const synonyms = await ImageService.getImages(word);
-      return synonyms;
+      const images = await ImageService.getImages(word);
+      return images;
     },
     queryKey: ['getSynonyms', word],
     enabled: !!word

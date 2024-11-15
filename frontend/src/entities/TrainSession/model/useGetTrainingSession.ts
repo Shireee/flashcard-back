@@ -1,11 +1,11 @@
-import { TrainSessionService } from '@shared/api/services';
+import { TrainingSessionService } from '@shared/api/services';
 import { useQuery } from 'react-query';
 
-export function useGetTrainSession() {
+export function useGetTrainingSession() {
   return useQuery({
     keepPreviousData: true,
     queryFn: async () => {
-      const { data } = await TrainSessionService.getTrainSession();
+      const { data } = await TrainingSessionService.getTrainingSession();
       return data;
     },
     queryKey: 'getTrainSession'
