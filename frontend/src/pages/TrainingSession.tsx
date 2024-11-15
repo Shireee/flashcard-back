@@ -1,18 +1,17 @@
-import { useUpdateRepeatNumber } from '@entities/TrainSession/model/useUpdateNumber';
+import { TrainingBar, TrainingView, useGetTrainingSession } from '@entities/TrainSession';
+import { Loader } from '@shared/ui';
 
 export const TrainingSession: React.FC = () => {
-  const { mutate: updateRepeatNumber, isLoading, isError } = useUpdateRepeatNumber();
+  const { data: trainingSessionData, isLoading: trainingSessionIsLoading } = useGetTrainingSession();
 
-  const handleUpdate = (id: number) => {
-    updateRepeatNumber(id);
-  };
-
-  return (
-    <div>
-      <button onClick={() => handleUpdate(1731680498898)} disabled={isLoading}>
-        Update Repeat Number
-      </button>
-      {isError && <p>Failed to update repeat number.</p>}
-    </div>
+  return trainingSessionIsLoading ? (
+    <Loader />
+  ) : (
+    trainingSessionData && (
+      <>
+        <TrainingBar sessionLength={trainingSessionData.sessionLength} />
+        <TrainingView trainingSession={trainingSessionData.content[0]} />
+      </>
+    )
   );
 };

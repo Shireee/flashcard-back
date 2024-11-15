@@ -1,0 +1,1 @@
+export { TrainingBar } from './TrainingBar';

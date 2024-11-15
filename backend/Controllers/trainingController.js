@@ -37,13 +37,19 @@ router.get("/getTraingSession", (req, res) => {
         }
       });
 
-      res.status(200).json(filteredCards);
+      const response = {
+        sessionLength: filteredCards.length,
+        content: filteredCards,
+      };
+
+      res.status(200).json(response);
     });
   } catch (error) {
     console.error("Error during filtering:", error);
     res.status(500).send("Error filtering card data.");
   }
 });
+
 router.patch("/updateRepeatNumber/:id", (req, res) => {
   const cardId = parseInt(req.params.id, 10);
 

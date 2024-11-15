@@ -1,3 +1,4 @@
 export * from './model';
-export { TrainBar } from './ui';
-export { TrainControls } from './ui';
+export { TrainingBar } from './ui';
+export { TrainingControls } from './ui';
+export { TrainingView } from './ui';
