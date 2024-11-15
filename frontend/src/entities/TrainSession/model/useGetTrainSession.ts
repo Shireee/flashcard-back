@@ -1,4 +1,4 @@
-import { TrainSessionService } from '@shared/api/services/TrainSessionService';
+import { TrainSessionService } from '@shared/api/services';
 import { useQuery } from 'react-query';
 
 export function useGetTrainSession() {

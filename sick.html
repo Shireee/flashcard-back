@@ -189,13 +189,13 @@
       });
 
       uploadButton.addEventListener("click", function () {
-        if (!imageData) {
-          alert("No image to upload.");
-          return;
-        }
-
         const formData = new FormData();
-        formData.append("image", imageData);
+
+        if (!imageData) {
+          console.log("Frontend: No image to upload");
+        } else {
+          formData.append("image", imageData);
+        }
 
         const mockCard = {
           id: Date.now(),
@@ -213,7 +213,7 @@
 
         formData.append("card", JSON.stringify(mockCard));
 
-        fetch("http://localhost:3000/upload", {
+        fetch("http://localhost:3000/flashcard/upload", {
           method: "POST",
           body: formData,
         })

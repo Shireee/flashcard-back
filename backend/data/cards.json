@@ -14,8 +14,8 @@
         "itemReveal": "Example reveal 2"
       }
     ],
-    "repeatNumber": 0,
-    "nextRepeat": 1731419879582,
+    "repeatNumber": 2,
+    "nextRepeat": 1731686614322,
     "metrika": {}
   },
   {
@@ -35,6 +35,120 @@
     ],
     "repeatNumber": 6,
     "nextRepeat": 1731419901093,
+    "metrika": {}
+  },
+  {
+    "id": 1731679493737,
+    "Img": "data\\upload\\20241115140453753_oQl0eVYd_n8.jpg",
+    "item": "Sample text",
+    "itemReveal": "Revealed text",
+    "examples": [
+      {
+        "item": "Example 1",
+        "itemReveal": "Example reveal 1"
+      },
+      {
+        "item": "Example 2",
+        "itemReveal": "Example reveal 2"
+      }
+    ],
+    "repeatNumber": 0,
+    "nextRepeat": 1731679493737,
+    "metrika": {}
+  },
+  {
+    "id": 1731679512709,
+    "Img": "data\\upload\\20241115140513141_GmBT6GQEOs0.jpg",
+    "item": "Sample text",
+    "itemReveal": "Revealed text",
+    "examples": [
+      {
+        "item": "Example 1",
+        "itemReveal": "Example reveal 1"
+      },
+      {
+        "item": "Example 2",
+        "itemReveal": "Example reveal 2"
+      }
+    ],
+    "repeatNumber": 0,
+    "nextRepeat": 1731679512709,
+    "metrika": {}
+  },
+  {
+    "id": 1731680488593,
+    "Img": "404",
+    "item": "Sample text",
+    "itemReveal": "Revealed text",
+    "examples": [
+      {
+        "item": "Example 1",
+        "itemReveal": "Example reveal 1"
+      },
+      {
+        "item": "Example 2",
+        "itemReveal": "Example reveal 2"
+      }
+    ],
+    "repeatNumber": 0,
+    "nextRepeat": 1731680488593,
+    "metrika": {}
+  },
+  {
+    "id": 1731680497054,
+    "Img": "404",
+    "item": "Sample text",
+    "itemReveal": "Revealed text",
+    "examples": [
+      {
+        "item": "Example 1",
+        "itemReveal": "Example reveal 1"
+      },
+      {
+        "item": "Example 2",
+        "itemReveal": "Example reveal 2"
+      }
+    ],
+    "repeatNumber": 0,
+    "nextRepeat": 1731680497054,
+    "metrika": {}
+  },
+  {
+    "id": 1731680498080,
+    "Img": "404",
+    "item": "Sample text",
+    "itemReveal": "Revealed text",
+    "examples": [
+      {
+        "item": "Example 1",
+        "itemReveal": "Example reveal 1"
+      },
+      {
+        "item": "Example 2",
+        "itemReveal": "Example reveal 2"
+      }
+    ],
+    "repeatNumber": 0,
+    "nextRepeat": 1731680498080,
+    "metrika": {}
+  },
+  {
+    "id": 1731680498898,
+    "Img": "404",
+    "item": "Sample text",
+    "itemReveal": "Revealed text",
+    "examples": [
+      {
+        "item": "Example 1",
+        "itemReveal": "Example reveal 1"
+      },
+      {
+        "item": "Example 2",
+        "itemReveal": "Example reveal 2"
+      }
+    ],
+    "repeatNumber": 0,
+    "nextRepeat": 1731680498898,
     "metrika": {}
   }
 ]

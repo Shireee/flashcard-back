@@ -1,11 +1,11 @@
-import { DictionaryService } from '@shared/api/services';
+import { ImageService } from '@shared/api/services';
 import { useQuery } from 'react-query';
 
-export function useGetSynonyms(word: string) {
+export function useGetImages(word: string) {
   return useQuery({
     keepPreviousData: true,
     queryFn: async () => {
-      const synonyms = await DictionaryService.getDictionary(word);
+      const synonyms = await ImageService.getImages(word);
       return synonyms;
     },
     queryKey: ['getSynonyms', word],
