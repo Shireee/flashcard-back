@@ -4,76 +4,143 @@ import { Flashcard } from '@shared/api/models/common';
 import { useUpdateRepeatNumber } from '@entities/TrainSession/model/useUpdateNumber';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import { SpeechSynthesisButton } from '@shared/ui';
-import { useState } from 'react';
+import { SyntheticEvent, useState } from 'react';
 import VisibilityIcon from '@mui/icons-material/Visibility';
+import styles from './TrainingView.module.scss';
 
 interface TrainingViewInterface {
   trainingSession: Flashcard;
+  handleNext: (repeat?: boolean) => void;
 }
 
-export const TrainingView: React.FC<TrainingViewInterface> = ({ trainingSession }) => {
+export const TrainingView: React.FC<TrainingViewInterface> = ({ trainingSession, handleNext }) => {
   const { id, Img, item, itemReveal, examples } = trainingSession;
   const [isRevealed, setIsRevealed] = useState(false);
 
   const { mutate: updateRepeatNumber } = useUpdateRepeatNumber();
 
   const handleMemorize = () => {
+    setIsRevealed((prevIsRevealed) => !prevIsRevealed);
     updateRepeatNumber(id);
+    handleNext();
   };
 
   const handleRepeat = () => {
-    console.log(id);
+    console.log(`Repeating item with id: ${id}`);
+    setIsRevealed((prevIsRevealed) => !prevIsRevealed);
+    handleNext(true);
   };
 
   return (
-    <Container>
-      <img width={100} height={100} src={Img} alt="no-seo" />
+    <Container
+      sx={{
+        padding: '0px',
+        height: '100%',
+        display: 'flex',
+        flexDirection: 'column'
+      }}
+    >
+      <img className={styles.image} src={Img} />
       <Box
         sx={{
+          marginBottom: '16px',
           display: 'flex',
           flexDirection: 'row',
           width: '100%',
           columnGap: '30px',
-          alignItems: 'center'
+          alignItems: 'center',
+          justifyContent: 'space-between'
         }}
       >
-        <Typography>{item}</Typography>
-        <SpeechSynthesisButton utterance={item} />
+        <Typography variant="h5" component="h1">
+          {item}
+        </Typography>
+        <SpeechSynthesisButton width={40} height={40} utterance={item} />
       </Box>
       {isRevealed ? (
-        <>
-          <Typography>{itemReveal}</Typography>
-          {examples.map((example) => {
-            return (
-              <Accordion>
+        <Box sx={{ marginBottom: 'auto' }}>
+          <Typography
+            sx={{
+              marginBottom: '16px'
+            }}
+            variant="h5"
+            component="h1"
+          >
+            {itemReveal}
+          </Typography>
+          <Box
+            sx={{
+              display: 'flex',
+              flexDirection: 'column',
+              rowGap: '16px',
+              overflowY: 'scroll',
+              maxHeight: '380px'
+            }}
+          >
+            {examples.map((example, index) => (
+              <Accordion
+                sx={{
+                  '&::before': {
+                    content: 'none'
+                  },
+                  borderRadius: '8px'
+                }}
+                key={index}
+              >
                 <AccordionSummary
                   sx={{
+                    padding: '16px',
+                    margin: 0,
                     '& .MuiAccordionSummary-content': {
+                      margin: 0,
                       display: 'flex',
                       flexDirection: 'row',
                       width: '100%',
                       justifyContent: 'space-between',
-                      alignItems: 'center'
+                      alignItems: 'center',
+                      '&.Mui-expanded': {
+                        margin: '0px'
+                      }
                     }
                   }}
                   expandIcon={<ExpandMoreIcon />}
                 >
                   <Typography>{example.item}</Typography>
-                  <SpeechSynthesisButton utterance={example.item} />
+                  <SpeechSynthesisButton utterance={example.item} width={30} height={30} />
                 </AccordionSummary>
-                <AccordionDetails>
+                <AccordionDetails
+                  sx={{
+                    padding: '16px',
+                    borderTop: '1px solid #434343'
+                  }}
+                >
                   <Typography>{example.itemReveal}</Typography>
                 </AccordionDetails>
               </Accordion>
-            );
-          })}
-          <TrainingControls handleMemorize={handleMemorize} handleRepeat={handleRepeat} />
-        </>
+            ))}
+          </Box>
+        </Box>
       ) : (
-        <IconButton onClick={() => setIsRevealed(true)}>
-          <VisibilityIcon />
-        </IconButton>
+        <Box
+          sx={{
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+            width: '100%',
+            height: '80px',
+            marginBottom: 'auto',
+            marginTop: '40px'
+          }}
+        >
+          <IconButton
+            sx={{ border: '1px solid gray', borderRadius: '8px', width: '80px', height: '80px' }}
+            onClick={() => setIsRevealed(true)}
+          >
+            <VisibilityIcon sx={{ width: '40px', height: '40px' }} />
+          </IconButton>
+        </Box>
       )}
+      <TrainingControls handleMemorize={handleMemorize} handleRepeat={handleRepeat} />
     </Container>
   );
 };

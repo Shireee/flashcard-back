@@ -14,8 +14,8 @@
         "itemReveal": "Example reveal 2"
       }
     ],
-    "repeatNumber": 1,
-    "nextRepeat": 1731690413101,
+    "repeatNumber": 2,
+    "nextRepeat": 1731796535315,
     "metrika": {}
   },
   {
@@ -33,8 +33,8 @@
         "itemReveal": "Example reveal 2"
       }
     ],
-    "repeatNumber": 0,
-    "nextRepeat": 1731680488593,
+    "repeatNumber": 2,
+    "nextRepeat": 1731841413276,
     "metrika": {}
   },
   {
@@ -52,8 +52,8 @@
         "itemReveal": "Example reveal 2"
       }
     ],
-    "repeatNumber": 0,
-    "nextRepeat": 1731680497054,
+    "repeatNumber": 2,
+    "nextRepeat": 1731841415755,
     "metrika": {}
   },
   {
@@ -71,12 +71,88 @@
         "itemReveal": "Example reveal 2"
       }
     ],
-    "repeatNumber": 0,
-    "nextRepeat": 1731680498080,
+    "repeatNumber": 2,
+    "nextRepeat": 1731845909251,
     "metrika": {}
   },
   {
     "id": 1731680498898,
+    "Img": "https://images.unsplash.com/photo-1487017159836-4e23ece2e4cf?crop=entropy&cs=srgb&fm=jpg&ixid=M3w1MzE5NzF8MHwxfHNlYXJjaHwxfHxvZmZpY2V8ZW58MHx8fHwxNzMxNjgyMDQ5fDA&ixlib=rb-4.0.3&q=85",
+    "item": "Sample text",
+    "itemReveal": "Revealed text",
+    "examples": [
+      {
+        "item": "Example 1",
+        "itemReveal": "Example reveal 1"
+      },
+      {
+        "item": "Example 2",
+        "itemReveal": "Example reveal 2"
+      }
+    ],
+    "repeatNumber": 14,
+    "nextRepeat": 1731789580006,
+    "metrika": {}
+  },
+  {
+    "id": 1731789613727,
+    "Img": "https://images.unsplash.com/photo-1487017159836-4e23ece2e4cf?crop=entropy&cs=srgb&fm=jpg&ixid=M3w1MzE5NzF8MHwxfHNlYXJjaHwxfHxvZmZpY2V8ZW58MHx8fHwxNzMxNjgyMDQ5fDA&ixlib=rb-4.0.3&q=85",
+    "item": "Sample text",
+    "itemReveal": "Revealed text",
+    "examples": [
+      {
+        "item": "Example 1",
+        "itemReveal": "Example reveal 1"
+      },
+      {
+        "item": "Example 2",
+        "itemReveal": "Example reveal 2"
+      }
+    ],
+    "repeatNumber": 1,
+    "nextRepeat": 1731791441088,
+    "metrika": {}
+  },
+  {
+    "id": 1731789620940,
+    "Img": "https://images.unsplash.com/photo-1487017159836-4e23ece2e4cf?crop=entropy&cs=srgb&fm=jpg&ixid=M3w1MzE5NzF8MHwxfHNlYXJjaHwxfHxvZmZpY2V8ZW58MHx8fHwxNzMxNjgyMDQ5fDA&ixlib=rb-4.0.3&q=85",
+    "item": "Sample text",
+    "itemReveal": "Revealed text",
+    "examples": [
+      {
+        "item": "Example 1",
+        "itemReveal": "Example reveal 1"
+      },
+      {
+        "item": "Example 2",
+        "itemReveal": "Example reveal 2"
+      }
+    ],
+    "repeatNumber": 6,
+    "nextRepeat": 1731789651665,
+    "metrika": {}
+  },
+  {
+    "id": 1731789692502,
+    "Img": "https://images.unsplash.com/photo-1487017159836-4e23ece2e4cf?crop=entropy&cs=srgb&fm=jpg&ixid=M3w1MzE5NzF8MHwxfHNlYXJjaHwxfHxvZmZpY2V8ZW58MHx8fHwxNzMxNjgyMDQ5fDA&ixlib=rb-4.0.3&q=85",
+    "item": "Sample text",
+    "itemReveal": "Revealed text",
+    "examples": [
+      {
+        "item": "Example 1",
+        "itemReveal": "Example reveal 1"
+      },
+      {
+        "item": "Example 2",
+        "itemReveal": "Example reveal 2"
+      }
+    ],
+    "repeatNumber": 1,
+    "nextRepeat": 1731792085463,
+    "metrika": {}
+  },
+  {
+    "id": 1731789697776,
     "Img": "404",
     "item": "Sample text",
     "itemReveal": "Revealed text",
@@ -90,8 +166,122 @@
         "itemReveal": "Example reveal 2"
       }
     ],
-    "repeatNumber": 3,
-    "nextRepeat": 1731710259151,
+    "repeatNumber": 1,
+    "nextRepeat": 1731792078868,
+    "metrika": {}
+  },
+  {
+    "id": 1731790066665,
+    "Img": "404",
+    "item": "Sample text",
+    "itemReveal": "Revealed text",
+    "examples": [
+      {
+        "item": "Example 1",
+        "itemReveal": "Example reveal 1"
+      },
+      {
+        "item": "Example 2",
+        "itemReveal": "Example reveal 2"
+      }
+    ],
+    "repeatNumber": 1,
+    "nextRepeat": 1731792090872,
+    "metrika": {}
+  },
+  {
+    "id": 1731790402827,
+    "Img": "404",
+    "item": "Sample text",
+    "itemReveal": "Revealed text",
+    "examples": [
+      {
+        "item": "Example 1",
+        "itemReveal": "Example reveal 1"
+      },
+      {
+        "item": "Example 2",
+        "itemReveal": "Example reveal 2"
+      }
+    ],
+    "repeatNumber": 0,
+    "nextRepeat": 1731790402827,
+    "metrika": {}
+  },
+  {
+    "id": 1731790568419,
+    "Img": "404",
+    "item": "Sample text",
+    "itemReveal": "Revealed text",
+    "examples": [
+      {
+        "item": "Example 1",
+        "itemReveal": "Example reveal 1"
+      },
+      {
+        "item": "Example 2",
+        "itemReveal": "Example reveal 2"
+      }
+    ],
+    "repeatNumber": 0,
+    "nextRepeat": 1731790568419,
+    "metrika": {}
+  },
+  {
+    "id": 1731790573507,
+    "Img": "404",
+    "item": "Sample text",
+    "itemReveal": "Revealed text",
+    "examples": [
+      {
+        "item": "Example 1",
+        "itemReveal": "Example reveal 1"
+      },
+      {
+        "item": "Example 2",
+        "itemReveal": "Example reveal 2"
+      }
+    ],
+    "repeatNumber": 0,
+    "nextRepeat": 1731790573507,
+    "metrika": {}
+  },
+  {
+    "id": 1731834319517,
+    "Img": "404",
+    "item": "Sample text",
+    "itemReveal": "Revealed text",
+    "examples": [
+      {
+        "item": "Example 1",
+        "itemReveal": "Example reveal 1"
+      },
+      {
+        "item": "Example 2",
+        "itemReveal": "Example reveal 2"
+      }
+    ],
+    "repeatNumber": 0,
+    "nextRepeat": 1731834319517,
+    "metrika": {}
+  },
+  {
+    "id": 1731834384056,
+    "Img": "404",
+    "item": "Sample text",
+    "itemReveal": "Revealed text",
+    "examples": [
+      {
+        "item": "Example 1",
+        "itemReveal": "Example reveal 1"
+      },
+      {
+        "item": "Example 2",
+        "itemReveal": "Example reveal 2"
+      }
+    ],
+    "repeatNumber": 0,
+    "nextRepeat": 1731834384056,
     "metrika": {}
   }
 ]

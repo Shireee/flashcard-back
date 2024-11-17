@@ -1,6 +1,9 @@
 import { ThemeOptions } from '@mui/material';
 
 export const themeOptions: ThemeOptions = {
+  palette: {
+    mode: 'dark'
+  },
   components: {
     MuiLinearProgress: {
       styleOverrides: {
