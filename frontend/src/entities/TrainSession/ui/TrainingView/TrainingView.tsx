@@ -4,7 +4,7 @@ import { Flashcard } from '@shared/api/models/common';
 import { useUpdateRepeatNumber } from '@entities/TrainSession/model/useUpdateNumber';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import { SpeechSynthesisButton } from '@shared/ui';
-import { SyntheticEvent, useState } from 'react';
+import { useState } from 'react';
 import VisibilityIcon from '@mui/icons-material/Visibility';
 import styles from './TrainingView.module.scss';
 
@@ -22,6 +22,7 @@ export const TrainingView: React.FC<TrainingViewInterface> = ({ trainingSession,
   const handleMemorize = () => {
     setIsRevealed((prevIsRevealed) => !prevIsRevealed);
     updateRepeatNumber(id);
+
     handleNext();
   };
 

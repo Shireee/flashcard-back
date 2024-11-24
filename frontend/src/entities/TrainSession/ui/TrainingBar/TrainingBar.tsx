@@ -27,7 +27,7 @@ export const TrainingBar: React.FC<TrainingBarProps> = (props) => {
             width: '100%',
             height: '4px',
             borderRadius: '4px',
-            backgroundColor: index <= currentIndex ? 'green' : 'gray'
+            backgroundColor: index < currentIndex ? 'green' : 'gray'
           }}
         />
       ))}

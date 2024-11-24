@@ -14,8 +14,8 @@
         "itemReveal": "Example reveal 2"
       }
     ],
-    "repeatNumber": 2,
-    "nextRepeat": 1731796535315,
+    "repeatNumber": 3,
+    "nextRepeat": 1731870421069,
     "metrika": {}
   },
   {
@@ -90,7 +90,7 @@
         "itemReveal": "Example reveal 2"
       }
     ],
-    "repeatNumber": 14,
+    "repeatNumber": 0,
     "nextRepeat": 1731789580006,
     "metrika": {}
   },
@@ -109,8 +109,8 @@
         "itemReveal": "Example reveal 2"
       }
     ],
-    "repeatNumber": 1,
-    "nextRepeat": 1731791441088,
+    "repeatNumber": 0,
+    "nextRepeat": 1731848821691,
     "metrika": {}
   },
   {
@@ -128,7 +128,7 @@
         "itemReveal": "Example reveal 2"
       }
     ],
-    "repeatNumber": 6,
+    "repeatNumber": 0,
     "nextRepeat": 1731789651665,
     "metrika": {}
   },
@@ -147,8 +147,8 @@
         "itemReveal": "Example reveal 2"
       }
     ],
-    "repeatNumber": 1,
-    "nextRepeat": 1731792085463,
+    "repeatNumber": 2,
+    "nextRepeat": 1731848969237,
     "metrika": {}
   },
   {
@@ -166,8 +166,8 @@
         "itemReveal": "Example reveal 2"
       }
     ],
-    "repeatNumber": 1,
-    "nextRepeat": 1731792078868,
+    "repeatNumber": 2,
+    "nextRepeat": 1731848866868,
     "metrika": {}
   },
   {
@@ -185,8 +185,8 @@
         "itemReveal": "Example reveal 2"
       }
     ],
-    "repeatNumber": 1,
-    "nextRepeat": 1731792090872,
+    "repeatNumber": 2,
+    "nextRepeat": 1731848863475,
     "metrika": {}
   },
   {
@@ -204,8 +204,8 @@
         "itemReveal": "Example reveal 2"
       }
     ],
-    "repeatNumber": 0,
-    "nextRepeat": 1731790402827,
+    "repeatNumber": 1,
+    "nextRepeat": 1731843472300,
     "metrika": {}
   },
   {
@@ -223,8 +223,8 @@
         "itemReveal": "Example reveal 2"
       }
     ],
-    "repeatNumber": 0,
-    "nextRepeat": 1731790568419,
+    "repeatNumber": 1,
+    "nextRepeat": 1731843469817,
     "metrika": {}
   },
   {
@@ -242,8 +242,8 @@
         "itemReveal": "Example reveal 2"
       }
     ],
-    "repeatNumber": 0,
-    "nextRepeat": 1731790573507,
+    "repeatNumber": 1,
+    "nextRepeat": 1731843419163,
     "metrika": {}
   },
   {
@@ -261,8 +261,8 @@
         "itemReveal": "Example reveal 2"
       }
     ],
-    "repeatNumber": 0,
-    "nextRepeat": 1731834319517,
+    "repeatNumber": 1,
+    "nextRepeat": 1731843419854,
     "metrika": {}
   },
   {
@@ -280,8 +280,103 @@
         "itemReveal": "Example reveal 2"
       }
     ],
+    "repeatNumber": 1,
+    "nextRepeat": 1731843420491,
+    "metrika": {}
+  },
+  {
+    "id": 1731841738297,
+    "Img": "404",
+    "item": "Sample text",
+    "itemReveal": "Revealed text",
+    "examples": [
+      {
+        "item": "Example 1",
+        "itemReveal": "Example reveal 1"
+      },
+      {
+        "item": "Example 2",
+        "itemReveal": "Example reveal 2"
+      }
+    ],
+    "repeatNumber": 1,
+    "nextRepeat": 1731843560752,
+    "metrika": {}
+  },
+  {
+    "id": 1731841739700,
+    "Img": "404",
+    "item": "Sample text",
+    "itemReveal": "Revealed text",
+    "examples": [
+      {
+        "item": "Example 1",
+        "itemReveal": "Example reveal 1"
+      },
+      {
+        "item": "Example 2",
+        "itemReveal": "Example reveal 2"
+      }
+    ],
+    "repeatNumber": 1,
+    "nextRepeat": 1731843549259,
+    "metrika": {}
+  },
+  {
+    "id": 1731841784190,
+    "Img": "404",
+    "item": "Sample text",
+    "itemReveal": "Revealed text",
+    "examples": [
+      {
+        "item": "Example 1",
+        "itemReveal": "Example reveal 1"
+      },
+      {
+        "item": "Example 2",
+        "itemReveal": "Example reveal 2"
+      }
+    ],
+    "repeatNumber": 1,
+    "nextRepeat": 1731843610299,
+    "metrika": {}
+  },
+  {
+    "id": 1731843012765,
+    "Img": "404",
+    "item": "Sample text",
+    "itemReveal": "Revealed text",
+    "examples": [
+      {
+        "item": "Example 1",
+        "itemReveal": "Example reveal 1"
+      },
+      {
+        "item": "Example 2",
+        "itemReveal": "Example reveal 2"
+      }
+    ],
     "repeatNumber": 0,
-    "nextRepeat": 1731834384056,
+    "nextRepeat": 1731843012765,
+    "metrika": {}
+  },
+  {
+    "id": 1731843013920,
+    "Img": "404",
+    "item": "Sample text",
+    "itemReveal": "Revealed text",
+    "examples": [
+      {
+        "item": "Example 1",
+        "itemReveal": "Example reveal 1"
+      },
+      {
+        "item": "Example 2",
+        "itemReveal": "Example reveal 2"
+      }
+    ],
+    "repeatNumber": 0,
+    "nextRepeat": 1731843013920,
     "metrika": {}
   }
 ]
