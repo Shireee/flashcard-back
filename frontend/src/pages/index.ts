@@ -1,1 +1,0 @@
-export { TrainingSession } from './TrainingSession';

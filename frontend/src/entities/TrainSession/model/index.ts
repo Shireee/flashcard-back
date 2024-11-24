@@ -1,1 +1,0 @@
-export { useGetTrainingSession } from './useGetTrainingSession';

@@ -7,12 +7,19 @@ const jsonFilePath = path.join(__dirname, "..", "data", "cards.json");
 
 router.post("/upload", async (req, res) => {
   try {
-    let uploadPath = "404";
+    let uploadPath = ""; // Инициализируем переменную
+
     if (req.files?.image) {
+      console.log("upload");
       const image = req.files.image;
       const timestamp = new Date().toISOString().replace(/[-:.TZ]/g, "");
-      const uploadPath = path.join("data/upload", `${timestamp}_${image.name}`);
-      await image.mv(uploadPath);
+
+      // Сохраняем файл в data/upload
+      uploadPath = path.join("data/upload", `${timestamp}_${image.name}`);
+      await image.mv(uploadPath); // Загружаем файл
+
+      // Путь, который будет сохраняться в JSON (относительный)
+      uploadPath = `${timestamp}_${image.name}`;
     }
 
     if (!req.body.card) return res.status(400).send("No card data provided.");
@@ -33,9 +40,10 @@ router.post("/upload", async (req, res) => {
         cards = [];
       }
 
+      // Добавляем данные карточки и путь к изображению
       cards.push({
         ...newCard,
-        Img: uploadPath,
+        Img: uploadPath, // Сохраняем относительный путь
       });
 
       fs.writeFile(jsonFilePath, JSON.stringify(cards, null, 2), (err) => {
