@@ -1,50 +1,43 @@
 const express = require("express");
-const fs = require("fs");
-const path = require("path");
-
+const db = require("../db"); // Предполагается, что у вас есть подключение к БД через pg-promise или pg
 const router = express.Router();
-const jsonFilePath = path.join(__dirname, "..", "data", "cards.json");
 
-// For selected deck we check all card for next_repeat
-
-router.get("/getTraingSession", (req, res) => {
+// Получение карточек для тренировки
+router.get("/getTraingSession", async (req, res) => {
   try {
-    fs.readFile(jsonFilePath, "utf-8", (err, data) => {
-      if (err) {
-        return res.status(500).send("Error reading card data.");
+    const currentTime = Date.now();
+
+    // Запрос всех карточек
+    const cards = await db.any(`
+      SELECT * FROM cards
+    `);
+
+    const filteredCards = cards.filter((card) => {
+      const nextRepeat = card.next_repeat;
+      const timeDifference = currentTime - nextRepeat;
+
+      switch (card.repeat_number) {
+        case 0:
+          return true;
+        case 1:
+          return timeDifference > 30 * 60 * 1000; // 30 minutes
+        case 2:
+          return timeDifference > 2 * 60 * 60 * 1000; // 2 hours
+        case 3:
+          return timeDifference > 8 * 60 * 60 * 1000; // 8 hours
+        case 4:
+          return timeDifference > 24 * 60 * 60 * 1000; // 1 day
+        case 5:
+          return timeDifference > 3 * 24 * 60 * 60 * 1000; // 3 days
+        default:
+          return false;
       }
+    });
 
-      const cards = JSON.parse(data);
-      const currentTime = Date.now();
-
-      const filteredCards = cards.filter((card) => {
-        const nextRepeat = card.nextRepeat;
-        const timeDifference = currentTime - nextRepeat;
-
-        switch (card.repeatNumber) {
-          case 0:
-            return true;
-          case 1:
-            return timeDifference > 30 * 60 * 1000; // 30 minutes
-          case 2:
-            return timeDifference > 2 * 60 * 60 * 1000; // 2 hours
-          case 3:
-            return timeDifference > 8 * 60 * 60 * 1000; // 8 hours
-          case 4:
-            return timeDifference > 24 * 60 * 60 * 1000; // 1 day
-          case 5:
-            return timeDifference > 3 * 24 * 60 * 60 * 1000; // 3 days
-          default:
-            return false;
-        }
-      });
-
-      const response = {
-        sessionLength: filteredCards.length,
-        content: filteredCards,
-      };
-
-      res.status(200).json(response);
+    // Отправляем ответ
+    res.status(200).json({
+      sessionLength: filteredCards.length,
+      content: filteredCards,
     });
   } catch (error) {
     console.error("Error during filtering:", error);
@@ -52,54 +45,60 @@ router.get("/getTraingSession", (req, res) => {
   }
 });
 
-router.patch("/updateRepeatNumber/:id", (req, res) => {
+// Обновление номера повторения и времени следующего повторения
+router.patch("/updateRepeatNumber/:id", async (req, res) => {
   const cardId = parseInt(req.params.id, 10);
 
-  fs.readFile(jsonFilePath, "utf-8", (err, data) => {
-    if (err) {
-      return res.status(500).send("Error reading card data.");
-    }
+  try {
+    // Получаем карточку по ID
+    const card = await db.oneOrNone("SELECT * FROM cards WHERE id = $1", [cardId]);
 
-    const cards = JSON.parse(data);
-    const cardIndex = cards.findIndex((card) => card.id === cardId);
-    if (cardIndex === -1) {
+    if (!card) {
       return res.status(404).send("Card not found.");
     }
 
-    // Update the repeatNumber and nextRepeat
     const currentTime = Date.now();
-    cards[cardIndex].repeatNumber += 1;
-    const { repeatNumber } = cards[cardIndex];
+    let newRepeatNumber = card.repeat_number + 1;
+    let newNextRepeat = currentTime;
 
-    switch (repeatNumber) {
+    // Обновляем next_repeat в зависимости от нового repeat_number
+    switch (newRepeatNumber) {
       case 1:
-        cards[cardIndex].nextRepeat = currentTime + 30 * 60 * 1000; // 30 minutes
+        newNextRepeat = currentTime + 30 * 60 * 1000; // 30 minutes
         break;
       case 2:
-        cards[cardIndex].nextRepeat = currentTime + 2 * 60 * 60 * 1000; // 2 hours
+        newNextRepeat = currentTime + 2 * 60 * 60 * 1000; // 2 hours
         break;
       case 3:
-        cards[cardIndex].nextRepeat = currentTime + 8 * 60 * 60 * 1000; // 8 hours
+        newNextRepeat = currentTime + 8 * 60 * 60 * 1000; // 8 hours
         break;
       case 4:
-        cards[cardIndex].nextRepeat = currentTime + 24 * 60 * 60 * 1000; // 1 day
+        newNextRepeat = currentTime + 24 * 60 * 60 * 1000; // 1 day
         break;
       case 5:
-        cards[cardIndex].nextRepeat = currentTime + 3 * 24 * 60 * 60 * 1000; // 3 days
+        newNextRepeat = currentTime + 3 * 24 * 60 * 60 * 1000; // 3 days
         break;
       default:
-        cards[cardIndex].nextRepeat = currentTime; // Default to the current time for safety
         break;
     }
 
-    fs.writeFile(jsonFilePath, JSON.stringify(cards, null, 2), (err) => {
-      if (err) {
-        return res.status(500).send("Error updating repeatNumber and nextRepeat.");
-      }
+    // Обновляем карточку в базе данных
+    await db.none(
+      `
+        UPDATE cards
+        SET repeat_number = $1, next_repeat = $2
+        WHERE id = $3
+      `,
+      [newRepeatNumber, newNextRepeat, cardId]
+    );
 
-      res.status(200).json(cards[cardIndex]);
-    });
-  });
+    // Отправляем обновленную карточку
+    const updatedCard = { ...card, repeat_number: newRepeatNumber, next_repeat: newNextRepeat };
+    res.status(200).json(updatedCard);
+  } catch (err) {
+    console.error("Error updating repeatNumber and nextRepeat:", err);
+    res.status(500).send("Error updating repeatNumber and nextRepeat.");
+  }
 });
 
 module.exports = router;
