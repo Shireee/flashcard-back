@@ -15,7 +15,7 @@ router.post("/upload", async (req, res) => {
       const timestamp = new Date().toISOString().replace(/[-:.TZ]/g, "");
 
       // Сохраняем файл в data/upload
-      uploadPath = path.join("data/upload", `${timestamp}_${image.name}`);
+      uploadPath = path.join("data/uploads", `${timestamp}_${image.name}`);
       await image.mv(uploadPath); // Загружаем файл
 
       // Путь, который будет сохраняться в JSON (относительный)

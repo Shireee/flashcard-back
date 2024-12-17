@@ -1,13 +1,11 @@
 const express = require("express");
 const fileUpload = require("express-fileupload");
-const fs = require("fs");
 const path = require("path");
 const cors = require("cors");
-const trainingController = require("./Controllers/trainingController");
-const flashcardController = require("./Controllers/flashcardController");
+require("dotenv").config();
 
 const app = express();
-const port = 3000;
+const db = require("./db");
 
 app.use(cors());
 app.use(express.static("public"));
@@ -15,11 +13,12 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(fileUpload());
 
-app.use("/uploads", express.static(path.join(__dirname, "data/upload")));
+app.use("/uploads", express.static(path.join(__dirname, "data/uploads")));
 
-app.use("/training", trainingController);
-app.use("/flashcard", flashcardController);
+app.use("/training", require("./controllers/trainingController"));
+app.use("/flashcard", require("./controllers/flashcardController"));
+app.use("/deck", require("./controllers/deckController"));
 
-app.listen(port, () => {
-  console.log(`Server is running on port ${port}`);
+app.listen(process.env.PORT, process.env.HOST, () => {
+  console.log(`Server listening on port: ${process.env.PORT}`);
 });
