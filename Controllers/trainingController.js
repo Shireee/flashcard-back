@@ -5,6 +5,8 @@ const path = require("path");
 const router = express.Router();
 const jsonFilePath = path.join(__dirname, "..", "data", "cards.json");
 
+// For selected deck we check all card for next_repeat
+
 router.get("/getTraingSession", (req, res) => {
   try {
     fs.readFile(jsonFilePath, "utf-8", (err, data) => {
