@@ -4,10 +4,22 @@ const db = require("../db");
 
 router.get("/all", async (req, res) => {
   try {
-    const data = await db.any("SELECT * FROM decks");
+    const data = await db.any(`
+      SELECT 
+        d.id, 
+        d.name, 
+        d.icon,
+        COUNT(c.id) AS card_amount,
+        FLOOR(
+          (COUNT(CASE WHEN c.repeat_number = 6 THEN 1 END)::NUMERIC / NULLIF(COUNT(c.id), 0)) * 100
+        ) AS progress
+      FROM decks d
+      LEFT JOIN cards c ON c.deck_id = d.id
+      GROUP BY d.id
+    `);
     res.status(200).json(data);
   } catch (error) {
-    console.error("Error fetching testimonials:", error);
+    console.error("Error fetching decks:", error);
     res.status(500).json({ message: "Internal server error", error: error.message });
   }
 });
@@ -15,10 +27,26 @@ router.get("/all", async (req, res) => {
 router.get("/:id", async (req, res) => {
   const deckId = parseInt(req.params.id, 10);
   try {
-    const data = await db.any(`SELECT * FROM decks WHERE id=${deckId}`);
+    const data = await db.one(
+      `
+      SELECT 
+        d.id, 
+        d.name, 
+        d.icon,
+        COUNT(c.id) AS card_amount,
+        FLOOR(
+          (COUNT(CASE WHEN c.repeat_number = 6 THEN 1 END)::NUMERIC / NULLIF(COUNT(c.id), 0)) * 100
+        ) AS progress
+      FROM decks d
+      LEFT JOIN cards c ON c.deck_id = d.id
+      WHERE d.id = $1
+      GROUP BY d.id
+    `,
+      [deckId]
+    );
     res.status(200).json(data);
   } catch (error) {
-    console.error("Error fetching testimonials:", error);
+    console.error("Error fetching deck:", error);
     res.status(500).json({ message: "Internal server error", error: error.message });
   }
 });
