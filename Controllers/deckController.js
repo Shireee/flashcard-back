@@ -10,8 +10,11 @@ router.get("/all", async (req, res) => {
         d.name, 
         d.icon,
         COUNT(c.id) AS card_amount,
-        FLOOR(
-          (COUNT(CASE WHEN c.repeat_number = 6 THEN 1 END)::NUMERIC / NULLIF(COUNT(c.id), 0)) * 100
+        COALESCE(
+          FLOOR(
+            (COUNT(CASE WHEN c.repeat_number = 6 THEN 1 END)::NUMERIC / NULLIF(COUNT(c.id), 0)) * 100
+          ),
+          0
         ) AS progress
       FROM decks d
       LEFT JOIN cards c ON c.deck_id = d.id
@@ -34,8 +37,11 @@ router.get("/:id", async (req, res) => {
         d.name, 
         d.icon,
         COUNT(c.id) AS card_amount,
-        FLOOR(
-          (COUNT(CASE WHEN c.repeat_number = 6 THEN 1 END)::NUMERIC / NULLIF(COUNT(c.id), 0)) * 100
+        COALESCE(
+          FLOOR(
+            (COUNT(CASE WHEN c.repeat_number = 6 THEN 1 END)::NUMERIC / NULLIF(COUNT(c.id), 0)) * 100
+          ),
+          0
         ) AS progress
       FROM decks d
       LEFT JOIN cards c ON c.deck_id = d.id
